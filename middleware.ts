@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
-import { COOKIE, hash } from "@/lib/unlock";
+import { COOKIE, PASSWORD_HASH } from "@/lib/unlock";
 
 /**
  * The Arena Club study is client work, so it sits behind a password.
@@ -11,9 +11,8 @@ import { COOKIE, hash } from "@/lib/unlock";
  * client-side gate can. The cookie holds a hash of the password rather than the
  * password, and is httpOnly so a script on the page can't read it either.
  */
-export async function middleware(req: NextRequest) {
-  const token = req.cookies.get(COOKIE)?.value;
-  if (token && token === (await hash(process.env.CASE_PASSWORD ?? ""))) {
+export function middleware(req: NextRequest) {
+  if (req.cookies.get(COOKIE)?.value === PASSWORD_HASH) {
     return NextResponse.next();
   }
 
