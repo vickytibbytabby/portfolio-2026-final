@@ -1,11 +1,9 @@
 "use client";
 
-import { useRouter } from "next/navigation";
 import { useState } from "react";
 import styles from "./locked.module.css";
 
 export default function Unlock() {
-  const router = useRouter();
   const [password, setPassword] = useState("");
   const [state, setState] = useState<"idle" | "checking" | "wrong">("idle");
 
@@ -18,9 +16,12 @@ export default function Unlock() {
       body: JSON.stringify({ password }),
     });
     if (res.ok) {
-      // the cookie is set; the middleware will let the real page through
-      router.refresh();
-      router.replace("/work/arena-club");
+      // A full page load, not router.replace: the browser is already sitting on
+      // /work/arena-club (the middleware rewrote it under the same URL), so a
+      // client-side navigation to that path is a no-op — the middleware never
+      // re-runs and the button hangs on "Checking…" forever. This re-requests
+      // the page, which is what makes the new cookie count.
+      window.location.replace("/work/arena-club");
       return;
     }
     setState("wrong");
