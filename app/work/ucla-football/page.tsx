@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import BackLink from "@/components/BackLink";
+import ScrollToTop from "@/components/ScrollToTop";
 import CaseNav from "@/components/CaseNav";
 import SiteFooter from "@/components/SiteFooter";
 import styles from "./ucla.module.css";
@@ -28,6 +29,8 @@ const FACTS = [
 export default function UclaFootballCase() {
   return (
     <>
+      <ScrollToTop />
+
       <main className={styles.page}>
         {/* ---- hero ---- */}
         <header className={styles.hero} data-hero="">

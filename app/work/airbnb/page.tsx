@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import BackLink from "@/components/BackLink";
+import ScrollToTop from "@/components/ScrollToTop";
 import CaseNav from "@/components/CaseNav";
 import SiteFooter from "@/components/SiteFooter";
 import styles from "./airbnb.module.css";
@@ -108,6 +109,8 @@ const BUCKET = [
 export default function AirbnbCase() {
   return (
     <>
+      <ScrollToTop />
+
       <main className={styles.page}>
         {/* ---- hero ---- */}
         <header className={styles.hero} data-hero="">

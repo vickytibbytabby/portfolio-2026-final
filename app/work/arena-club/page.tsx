@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import SiteFooter from "@/components/SiteFooter";
 import BackLink from "@/components/BackLink";
+import ScrollToTop from "@/components/ScrollToTop";
 import CaseNav from "@/components/CaseNav";
 import Lede from "./Lede";
 import ProjectTabs from "./ProjectTabs";
@@ -288,6 +289,8 @@ function HomepageBody() {
 export default function ArenaClubCase() {
   return (
     <>
+      <ScrollToTop />
+
       <main className={styles.page}>
         {/* ---- hero ---- */}
         <header className={styles.hero} data-hero="">

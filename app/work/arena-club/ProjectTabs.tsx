@@ -53,11 +53,21 @@ export default function ProjectTabs({ tabs }: { tabs: Tab[] }) {
     return () => ro.disconnect();
   }, [at]);
 
-  // The row scrolls sideways on a phone; keep the tab you picked in view.
+  /**
+   * The row scrolls sideways on a phone; keep the tab you picked in view.
+   *
+   * This scrolls the ROW, not the page. `scrollIntoView` was doing both: on
+   * mount the tab row is far below the fold, so bringing it into view scrolled
+   * the whole page down and the study opened halfway through itself.
+   */
   useEffect(() => {
     const nav = navRef.current;
     const btn = nav?.querySelectorAll("button")[at] as HTMLElement | undefined;
-    btn?.scrollIntoView({ block: "nearest", inline: "nearest", behavior: "smooth" });
+    if (!nav || !btn) return;
+    nav.scrollTo({
+      left: btn.offsetLeft - (nav.clientWidth - btn.offsetWidth) / 2,
+      behavior: "smooth",
+    });
   }, [at]);
 
   const active = tabs[at];
