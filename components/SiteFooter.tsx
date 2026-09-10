@@ -1,9 +1,7 @@
 import styles from "./SiteFooter.module.css";
 
-/** Everything here opens in a new tab, the resume page included. */
 const LINKS = [
   { label: "Email", href: "mailto:vickyyjen@gmail.com" },
-  { label: "Resume", href: "/resume" },
   { label: "Linkedin", href: "https://www.linkedin.com/in/vickyjen" },
 ];
 
@@ -23,7 +21,7 @@ export default function SiteFooter() {
               key={l.label}
               className={styles.link}
               href={l.href}
-              {...(l.href.startsWith("http") || l.href === "/resume"
+              {...(l.href.startsWith("http")
                 ? { target: "_blank", rel: "noreferrer noopener" }
                 : {})}
             >
