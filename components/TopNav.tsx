@@ -10,7 +10,10 @@ import { canTransition, fadeTo } from "@/lib/pageTransition";
 import styles from "./TopNav.module.css";
 
 /** Sections of the homepage rather than pages of their own. */
-const SECTIONS = [{ id: "home", label: "Home" }];
+const SECTIONS = [
+  { id: "home", label: "Home" },
+  { id: "works", label: "Works" },
+];
 
 const IDS = SECTIONS.map((i) => i.id);
 
@@ -71,7 +74,7 @@ export default function TopNav() {
     >
       <ul className={styles.list}>
         {SECTIONS.map((item) => {
-          // only the homepage has this to scroll to, so from a case study they
+          // only the homepage has these to scroll to, so from a case study they
           // have to navigate home first
           const on = home && active === item.id;
           return (
@@ -100,17 +103,6 @@ export default function TopNav() {
           </Link>
         </li>
 
-        {/* sits with the rest but isn't a page — it leaves the site */}
-        <li>
-          <a
-            className={styles.link}
-            href="/resume"
-            target="_blank"
-            rel="noreferrer noopener"
-          >
-            Resume
-          </a>
-        </li>
       </ul>
     </nav>
   );
